@@ -19,8 +19,9 @@ class Analytics {
             meta: properties
         };
 
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://megaapp-walk.vercel.app';
         // Fire and forget - don't await
-        fetch('http://localhost:3000/api/analytics', {
+        fetch(`${API_URL}/api/analytics`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)

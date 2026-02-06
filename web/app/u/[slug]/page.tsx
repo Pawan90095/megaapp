@@ -3,8 +3,9 @@ import { UserProfile } from '../../types';
 import ProfileActions from './ProfileActions';
 
 async function getProfile(slug: string): Promise<UserProfile | null> {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://megaapp-walk.vercel.app';
     try {
-        const res = await fetch(`http://localhost:3000/api/users/${slug}`, {
+        const res = await fetch(`${API_URL}/api/users/${slug}`, {
             cache: 'no-store', // Always fetch fresh data
         });
 
