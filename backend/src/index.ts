@@ -48,7 +48,7 @@ app.get('/q/:slug', async (req, res) => {
             );
         }
     } catch (e) {
-        console.error('QR Scan Tracking Failed:', e);
+        // QR scan tracking failed silently - don't break redirect
     }
 
     // 3. Redirect (Always redirect even if tracking fails)
@@ -61,7 +61,10 @@ app.get('/health', (req, res) => {
 
 if (process.env.NODE_ENV !== 'production') {
     app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
+        // Only log in development
+        if (process.env.NODE_ENV !== 'production') {
+            console.log(`Server running on port ${port}`);
+        }
     });
 }
 

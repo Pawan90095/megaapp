@@ -52,7 +52,6 @@ export const getProfile = async (req: Request, res: Response) => {
             social_links: social_links.rows
         });
     } catch (err) {
-        console.error(err);
         res.status(500).json({ message: 'Server error' });
     }
 };
@@ -153,7 +152,6 @@ export const updateProfile = async (req: Request, res: Response) => {
 
     } catch (err) {
         await client.query('ROLLBACK');
-        console.error(err);
         res.status(500).json({ message: 'Server error' });
     } finally {
         client.release();
@@ -176,12 +174,11 @@ export const createProfile = async (req: Request, res: Response) => {
         const token = jwt.sign({ id: user.id, slug: user.slug }, JWT_SECRET, { expiresIn: '7d' }); // Longer expiry for mobile
 
         res.status(201).json({ ...user, token });
-    } catch (err: any) {
-        if (err.code === '23505') { // Unique violation
+    } catch (err) {
+        if (err && typeof err === 'object' && 'code' in err && err.code === '23505') {
             res.status(409).json({ message: 'User already exists' });
             return;
         }
-        console.error(err);
         res.status(500).json({ message: 'Server error' });
     }
 }
@@ -204,7 +201,6 @@ export const loginUser = async (req: Request, res: Response) => {
         const token = jwt.sign({ id: user.rows[0].id, slug: user.rows[0].slug }, JWT_SECRET, { expiresIn: '1h' });
         res.json({ token, slug: user.rows[0].slug });
     } catch (err) {
-        console.error(err);
         res.status(500).json({ message: 'Server error' });
     }
 }

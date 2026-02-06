@@ -27,7 +27,9 @@ class Analytics {
             body: JSON.stringify(payload)
         }).catch(err => console.error('[Analytics] Failed to send event:', err));
 
-        if (properties?.slug) {
+        // Only log in development (client-side check)
+        if (typeof window !== 'undefined' && properties?.slug) {
+            // In development, log analytics events
             console.log(`[Analytics] Sent ${event} for ${properties.slug}`);
         }
     }

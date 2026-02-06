@@ -16,7 +16,7 @@ async function getProfile(slug: string): Promise<UserProfile | null> {
 
         return res.json();
     } catch (error) {
-        console.error(error);
+        // Error fetching profile - return null to show 404
         return null;
     }
 }

@@ -18,7 +18,7 @@ class DashboardRepository {
       
       return AnalyticsStats.fromJson(response.data);
     } catch (e) {
-      print('Dashboard Fetch Error: $e');
+      // Error fetching dashboard stats, return empty stats
       return AnalyticsStats();
     }
   }

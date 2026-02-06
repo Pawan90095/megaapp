@@ -18,7 +18,6 @@ export const trackEvent = async (req: Request, res: Response) => {
         );
         res.sendStatus(201);
     } catch (err) {
-        console.error(err);
         res.status(500).json({ message: 'Server error' });
     }
 };
@@ -49,7 +48,6 @@ export const getStats = async (req: Request, res: Response) => {
 
         res.json(stats);
     } catch (err) {
-        console.error(err);
         res.status(500).json({ message: 'Server error' });
     }
 };

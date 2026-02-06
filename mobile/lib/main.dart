@@ -1,9 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'core/router/app_router.dart';
 import 'core/service_locator.dart' as di;
+import 'core/theme/app_theme.dart';
 import 'features/profile/presentation/bloc/profile_bloc.dart';
 
 import 'features/profile/presentation/bloc/profile_event.dart';
@@ -28,11 +27,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: 'Professional Identity',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
-          useMaterial3: true,
-          textTheme: GoogleFonts.interTextTheme(),
-        ),
+        theme: AppTheme.lightTheme,
         routerConfig: appRouter,
       ),
     );

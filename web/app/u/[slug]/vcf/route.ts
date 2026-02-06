@@ -19,7 +19,7 @@ async function getProfile(slug: string): Promise<UserProfile | null> {
         if (!res.ok) return null;
         return res.json();
     } catch (error) {
-        console.error(error);
+        // Error fetching profile for VCF - return null
         return null;
     }
 }

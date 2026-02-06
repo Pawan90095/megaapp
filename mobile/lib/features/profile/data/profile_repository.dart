@@ -1,9 +1,6 @@
 import 'package:dio/dio.dart';
 import '../domain/profile_model.dart';
-import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'dart:io';
 import 'package:flutter/foundation.dart';
 
 String get baseUrl {
