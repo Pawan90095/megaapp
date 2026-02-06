@@ -1,0 +1,8 @@
+BEGIN:VCARD
+VERSION:3.0
+N:;Test User;;;
+FN:Test User
+TITLE:Senior Developer
+EMAIL;type=INTERNET;type=WORK:undefined
+NOTE:Verifying Updated Bio
+END:VCARD

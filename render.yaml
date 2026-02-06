@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: professional-identity-backend
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.10.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: professional-identity-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://your-frontend-url.vercel.app # User will update this
+
+databases:
+  - name: professional-identity-db
+    plan: free
+    databaseName: identity_db
+    user: identity_user

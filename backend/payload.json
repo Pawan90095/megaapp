@@ -1,0 +1,21 @@
+{
+    "headline": "Senior Developer",
+    "experience": [
+        {
+            "title": "Dev",
+            "company": "Google",
+            "location": "Remote",
+            "start_date": "2020-01-01",
+            "is_current": true,
+            "description": "Working on Flutter"
+        }
+    ],
+    "skills": [
+        {
+            "name": "Flutter",
+            "proficiency": 5,
+            "category": "Mobile"
+        }
+    ],
+    "education": []
+}

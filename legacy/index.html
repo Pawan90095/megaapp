@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563EB">
+    <meta name="description" content="Professional Identity Platform - Your digital resume and professional profile">
+    <link rel="manifest" href="manifest.json">
+    <title>Professional Identity</title>
+
+    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/screens.css">
+
+    <!-- Icons (using simple text icons for now) -->
+    <style>
+        .icon {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HOME SCREEN -->
+    <div id="homeScreen" class="screen active">
+        <div class="screen__content">
+            <h1 class="home-welcome">Good evening, Alex</h1>
+
+            <!-- Profile Completion Card -->
+            <div class="card home-profile-completion">
+                <div class="progress-ring">
+                    <svg width="80" height="80">
+                        <circle class="progress-ring__circle-bg" cx="40" cy="40" r="34"></circle>
+                        <circle class="progress-ring__circle" cx="40" cy="40" r="34" stroke-dasharray="213.6"
+                            stroke-dashoffset="53.4"></circle>
+                    </svg>
+                    <div class="progress-ring__text">75%</div>
+                </div>
+                <div class="home-profile-completion__text">
+                    <div class="home-profile-completion__title">Complete your profile</div>
+                    <div class="home-profile-completion__subtitle">Add more details to stand out</div>
+                </div>
+                <button class="btn--icon" onclick="showEditModal('about')">
+                    <span class="icon">✏️</span>
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="home-stats">
+                <div class="card stat-card">
+                    <div class="stat-card__value">1,247</div>
+                    <div class="stat-card__label">Profile Views</div>
+                    <div class="stat-card__change">+23 this week</div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-card__value">32</div>
+                    <div class="stat-card__label">Share Count</div>
+                </div>
+            </div>
+
+            <!-- Share CTA -->
+            <div class="home-cta">
+                <button class="btn btn--primary btn--full" onclick="showShareSheet()">
+                    <span class="icon">📤</span>
+                    Share Profile
+                </button>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="home-quick-actions">
+                <button class="icon-btn" onclick="showQRModal()">
+                    <span class="icon-btn__icon">📱</span>
+                    <span class="icon-btn__label">View QR Code</span>
+                </button>
+                <button class="icon-btn" onclick="switchTab('profile')">
+                    <span class="icon-btn__icon">✏️</span>
+                    <span class="icon-btn__label">Edit Profile</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROFILE SCREEN -->
+    <div id="profileScreen" class="screen">
+        <div class="screen__content">
+            <!-- Profile Header Card -->
+            <div class="card profile-header-card">
+                <div class="profile-header-card__edit" onclick="showEditModal('header')">
+                    <span class="icon">✏️</span>
+                </div>
+                <div class="profile-header-card__photo-wrapper">
+                    <div class="profile-photo profile-photo--placeholder">AM</div>
+                </div>
+                <h2 class="profile-header-card__name" id="profileName">Alex Morgan</h2>
+                <p class="profile-header-card__headline" id="profileHeadline">Senior Product Designer</p>
+            </div>
+
+            <!-- About Section -->
+            <div class="card profile-section">
+                <div class="section-header">
+                    <h3 class="section-title">About</h3>
+                    <span class="section-action" onclick="showEditModal('about')">Edit</span>
+                </div>
+                <p class="profile-section__content" id="profileAbout">
+                    Passionate about creating user-centered digital experiences that solve complex problems and delight
+                    users.
+                    With over 5 years of experience, I specialize in mobile design, product strategy, and building
+                    accessible interfaces.
+                </p>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="card profile-section">
+                <div class="section-header">
+                    <h3 class="section-title">Skills</h3>
+                    <span class="section-action" onclick="showEditModal('skills')">+Add</span>
+                </div>
+                <div class="skill-tags" id="profileSkills">
+                    <span class="skill-tag">UX Design</span>
+                    <span class="skill-tag">Product Strategy</span>
+                    <span class="skill-tag">Mobile Design</span>
+                    <span class="skill-tag">Figma</span>
+                </div>
+            </div>
+
+            <!-- Experience Section -->
+            <div class="card profile-section">
+                <div class="section-header">
+                    <h3 class="section-title">Experience</h3>
+                    <span class="section-action" onclick="showEditModal('experience')">+Add</span>
+                </div>
+                <div id="profileExperience">
+                    <div class="profile-timeline-item">
+                        <div class="profile-timeline-item__title">Senior Designer • Google</div>
+                        <div class="profile-timeline-item__meta">
+                            <span>2020 - Present</span>
+                            <span>•</span>
+                            <span>📍 Mountain View, CA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div class="card profile-section">
+                <div class="section-header">
+                    <h3 class="section-title">Education</h3>
+                    <span class="section-action" onclick="showEditModal('education')">+Add</span>
+                </div>
+                <div id="profileEducation">
+                    <div class="profile-timeline-item">
+                        <div class="profile-timeline-item__title">Stanford University</div>
+                        <div class="profile-timeline-item__subtitle">Bachelor of Science in Human-Computer Interaction
+                        </div>
+                        <div class="profile-timeline-item__meta">2016 - 2020</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Buttons -->
+            <div class="card profile-section">
+                <div class="section-header">
+                    <h3 class="section-title">Contact buttons</h3>
+                </div>
+                <div class="contact-buttons">
+                    <button class="contact-btn">
+                        <span class="contact-btn__icon">✉️</span>
+                        Email
+                    </button>
+                    <button class="contact-btn">
+                        <span class="contact-btn__icon">💼</span>
+                        LinkedIn
+                    </button>
+                    <button class="contact-btn">
+                        <span class="contact-btn__icon">📞</span>
+                        Phone
+                    </button>
+                    <button class="contact-btn">
+                        <span class="contact-btn__icon">🌐</span>
+                        Website
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANALYTICS SCREEN -->
+    <div id="analyticsScreen" class="screen">
+        <div class="screen__content">
+            <!-- Total Views Card -->
+            <div class="card analytics-hero stat-card">
+                <div class="stat-card__label">Total Profile Views</div>
+                <div class="stat-card__value">1,247</div>
+                <div class="stat-card__change">+23 this week</div>
+            </div>
+
+            <!-- Views Chart -->
+            <div class="card">
+                <h3 class="section-title" style="margin-bottom: var(--spacing-4);">Views over time</h3>
+                <div class="analytics-chart">
+                    <div class="analytics-chart__bar" style="height: 40%;">
+                        <div class="analytics-chart__label">Mon</div>
+                    </div>
+                    <div class="analytics-chart__bar" style="height: 55%;">
+                        <div class="analytics-chart__label">Tue</div>
+                    </div>
+                    <div class="analytics-chart__bar" style="height: 48%;">
+                        <div class="analytics-chart__label">Wed</div>
+                    </div>
+                    <div class="analytics-chart__bar" style="height: 65%;">
+                        <div class="analytics-chart__label">Thu</div>
+                    </div>
+                    <div class="analytics-chart__bar" style="height: 72%;">
+                        <div class="analytics-chart__label">Fri</div>
+                    </div>
+                    <div class="analytics-chart__bar" style="height: 85%;">
+                        <div class="analytics-chart__label">Sat</div>
+                    </div>
+                    <div class="analytics-chart__bar" style="height: 95%;">
+                        <div class="analytics-chart__label">Sun</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Views -->
+            <div class="card analytics-list">
+                <h3 class="section-title" style="margin-bottom: var(--spacing-4);">Recent Views</h3>
+                <div class="analytics-list-item">
+                    <div class="analytics-list-item__avatar" style="background: #00A4EF;">M</div>
+                    <div class="analytics-list-item__content">
+                        <div class="analytics-list-item__text">Viewed by recruiter from Microsoft</div>
+                        <div class="analytics-list-item__time">2h ago</div>
+                    </div>
+                </div>
+                <div class="analytics-list-item">
+                    <div class="analytics-list-item__avatar" style="background: #FF9900;">A</div>
+                    <div class="analytics-list-item__content">
+                        <div class="analytics-list-item__text">Viewed by recruiter from Amazon</div>
+                        <div class="analytics-list-item__time">4h ago</div>
+                    </div>
+                </div>
+                <div class="analytics-list-item">
+                    <div class="analytics-list-item__avatar" style="background: #4285F4;">G</div>
+                    <div class="analytics-list-item__content">
+                        <div class="analytics-list-item__text">Viewed by recruiter from Google</div>
+                        <div class="analytics-list-item__time">1d ago</div>
+                    </div>
+                </div>
+                <div class="analytics-list-item">
+                    <div class="analytics-list-item__avatar" style="background: #1877F2;">F</div>
+                    <div class="analytics-list-item__content">
+                        <div class="analytics-list-item__text">Viewed by recruiter from Facebook</div>
+                        <div class="analytics-list-item__time">2d ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Share CTA -->
+            <button class="btn btn--primary btn--full" onclick="showShareSheet()">
+                <span class="icon">📤</span>
+                Share Profile
+            </button>
+        </div>
+    </div>
+
+    <!-- SETTINGS SCREEN -->
+    <div id="settingsScreen" class="screen">
+        <div class="screen__content">
+            <!-- Account Section -->
+            <div class="settings-section">
+                <div class="settings-section__title">Account</div>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="settings-item__left">
+                            <div class="profile-photo profile-photo--small profile-photo--placeholder">AM</div>
+                            <div class="settings-item__text">
+                                <div class="settings-item__label">Alex Morgan</div>
+                            </div>
+                        </div>
+                        <div class="settings-item__right">
+                            <span class="settings-item__chevron">›</span>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item__left">
+                            <div class="settings-item__text">
+                                <div class="settings-item__label">Email</div>
+                                <div class="settings-item__value">alex@example.com</div>
+                            </div>
+                        </div>
+                        <div class="settings-item__right">
+                            <span class="settings-item__chevron">›</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Settings Section -->
+            <div class="settings-section">
+                <div class="settings-section__title">Profile Settings</div>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="settings-item__left">
+                            <div class="settings-item__text">
+                                <div class="settings-item__label">Profile Visibility</div>
+                            </div>
+                        </div>
+                        <div class="settings-item__right">
+                            <div class="toggle active" onclick="toggleSwitch(this)">
+                                <div class="toggle__handle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item__left">
+                            <div class="settings-item__text">
+                                <div class="settings-item__label">Custom Profile Link</div>
+                                <div class="settings-item__value">@alexmorgan</div>
+                            </div>
+                        </div>
+                        <div class="settings-item__right">
+                            <span class="settings-item__chevron">›</span>
+                        </div>
+                    </div>
+                    <div class="settings-item" onclick="showQRModal()">
+                        <div class="settings-item__left">
+                            <div class="settings-item__text">
+                                <div class="settings-item__label">QR Code</div>
+                            </div>
+                        </div>
+                        <div class="settings-item__right">
+                            <span class="icon">⬇️</span>
+                            <span class="settings-item__chevron">›</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div class="settings-section">
+                <div class="settings-section__title">Support</div>
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <div class="settings-item__left">
+                            <div class="settings-item__text">
+                                <div class="settings-item__label">Help Center</div>
+                            </div>
+                        </div>
+                        <div class="settings-item__right">
+                            <span class="settings-item__chevron">›</span>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item__left">
+                            <div class="settings-item__text">
+                                <div class="settings-item__label">Privacy Policy</div>
+                            </div>
+                        </div>
+                        <div class="settings-item__right">
+                            <span class="settings-item__chevron">›</span>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-item__left">
+                            <div class="settings-item__text">
+                                <div class="settings-item__label">Terms of Service</div>
+                            </div>
+                        </div>
+                        <div class="settings-item__right">
+                            <span class="settings-item__chevron">›</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logout -->
+            <div class="settings-section">
+                <div class="settings-list">
+                    <div class="settings-item settings-item--danger" onclick="logout()">
+                        Logout
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" data-tab="home" onclick="switchTab('home')">
+            <span class="nav-item__icon">🏠</span>
+            <span class="nav-item__label">Home</span>
+        </div>
+        <div class="nav-item" data-tab="profile" onclick="switchTab('profile')">
+            <span class="nav-item__icon">👤</span>
+            <span class="nav-item__label">Profile</span>
+        </div>
+        <div class="nav-item" data-tab="analytics" onclick="switchTab('analytics')">
+            <span class="nav-item__icon">📊</span>
+            <span class="nav-item__label">Analytics</span>
+        </div>
+        <div class="nav-item" data-tab="settings" onclick="switchTab('settings')">
+            <span class="nav-item__icon">⚙️</span>
+            <span class="nav-item__label">Settings</span>
+        </div>
+    </nav>
+
+    <!-- MODALS -->
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeAllModals()"></div>
+
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="modal qr-modal">
+        <div class="modal__close" onclick="closeAllModals()">×</div>
+        <h2 class="qr-modal__title">Share your profile</h2>
+        <div class="qr-modal__code">
+            <svg width="260" height="260" viewBox="0 0 260 260">
+                <rect width="260" height="260" fill="white" />
+                <text x="130" y="130" text-anchor="middle" dominant-baseline="middle" font-size="24" fill="#94A3B8">QR
+                    Code</text>
+            </svg>
+        </div>
+        <p class="qr-modal__instruction">Scan to view profile</p>
+        <div class="qr-modal__profile">
+            <div class="profile-photo profile-photo--small profile-photo--placeholder">AM</div>
+            <div>
+                <div class="font-semibold">Alex Morgan</div>
+                <div class="text-secondary" style="font-size: var(--font-size-sm);">Senior Product Designer</div>
+            </div>
+        </div>
+        <div class="qr-modal__buttons">
+            <button class="btn btn--outline btn--full">
+                <span class="icon">⬇️</span>
+                Download QR Code
+            </button>
+            <button class="btn btn--primary btn--full" onclick="closeAllModals(); showShareSheet();">
+                <span class="icon">📤</span>
+                Share Link
+            </button>
+        </div>
+    </div>
+
+    <!-- Share Bottom Sheet -->
+    <div id="shareSheet" class="bottom-sheet">
+        <div class="bottom-sheet__handle"></div>
+        <h2 class="bottom-sheet__title">Share Profile</h2>
+
+        <div class="share-preview">
+            <div class="profile-photo profile-photo--small profile-photo--placeholder">AM</div>
+            <div class="share-preview__text">
+                <div class="share-preview__name">Alex Morgan</div>
+                <div class="share-preview__headline">Senior Product Designer</div>
+            </div>
+        </div>
+
+        <div class="share-link">
+            <div class="share-link__text">yourprofile.app/@alexmorgan</div>
+            <div class="share-link__copy" onclick="copyLink()">
+                <span class="icon">📋</span>
+                Copy
+            </div>
+        </div>
+
+        <div class="share-options">
+            <div class="share-option" onclick="copyLink()">
+                <div class="share-option__icon">🔗</div>
+                <div class="share-option__label">Copy Link</div>
+            </div>
+            <div class="share-option" onclick="closeAllModals(); showQRModal();">
+                <div class="share-option__icon">📱</div>
+                <div class="share-option__label">QR Code</div>
+            </div>
+            <div class="share-option">
+                <div class="share-option__icon" style="background: #0077B5;">💼</div>
+                <div class="share-option__label">LinkedIn</div>
+            </div>
+            <div class="share-option">
+                <div class="share-option__icon">✉️</div>
+                <div class="share-option__label">Email</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="edit-modal">
+        <div class="edit-modal__header">
+            <span class="edit-modal__cancel" onclick="closeAllModals()">Cancel</span>
+            <span class="edit-modal__title">Edit About</span>
+            <span class="edit-modal__save" onclick="saveEdit()">Save</span>
+        </div>
+        <div class="edit-modal__content">
+            <div class="input-group">
+                <label class="input-label">About</label>
+                <textarea class="input textarea"
+                    placeholder="Tell us a little about yourself...">Passionate about creating user-centered digital experiences that solve complex problems and delight users. With over 5 years of experience, I specialize in mobile design, product strategy, and building accessible interfaces.</textarea>
+                <div class="input-counter">250/500</div>
+                <div class="input-helper">Write a brief introduction about yourself</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>
