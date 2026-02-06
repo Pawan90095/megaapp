@@ -1,13 +1,11 @@
 {
-    "functions": {
-        "api/index.ts": {
-            "runtime": "@vercel/node"
-        }
-    },
+    "regions": [
+        "bom1"
+    ],
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/api"
+            "destination": "/api/index.ts"
         }
     ]
 }
