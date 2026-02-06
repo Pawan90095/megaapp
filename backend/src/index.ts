@@ -23,6 +23,10 @@ import userRoutes from './routes/userRoutes';
 import analyticsRoutes from './routes/analyticsRoutes';
 
 // Routes
+app.get('/', (req, res) => {
+    res.json({ message: 'Professional Identity API is LIVE', version: '1.0.0' });
+});
+
 app.use('/api/users', userRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
